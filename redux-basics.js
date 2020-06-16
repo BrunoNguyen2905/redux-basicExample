@@ -2,7 +2,8 @@ const redux = require('redux');
 const createStore = redux.createStore;
 
 const initialState = {
-    counter: 0
+    counter: 0,
+    status: false
 }
 
 //Reducers
@@ -22,12 +23,20 @@ const rootReducer = (state = initialState, action) =>{
             counter: state.counter +action.value // copy the old state then overwritte it
         };
     }
+
+    if(action.type === "TOGGLE"){
+       
+        return {
+            ...state,
+            status: !state.status
+        }
+    }
     return state;
 }
 
-//Store
+//Store- manage states
 const store = createStore(rootReducer);
-console.log(store.getState());
+console.log("DEFAULT: ", store.getState());
 
 //Subscription
 store.subscribe(() =>{
@@ -36,5 +45,6 @@ store.subscribe(() =>{
 //Dispatching Action: deal with (a task or opponent) quickly and efficiently.
 store.dispatch({type: 'INC_COUNTER'});
 store.dispatch({type: 'ADD_COUNTER', value: 10});
-console.log(store.getState());
+store.dispatch({type: 'TOGGLE'});
+console.log("AFTER: ", store.getState());
 
