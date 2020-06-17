@@ -1,4 +1,4 @@
-import * as actionTypes from "../actions"; //avoid typo errors
+import * as actionTypes from "../actions/actions"; //avoid typo errors
 
 const initialState = {
     results: []
